@@ -1,0 +1,46 @@
+<html>
+  <head><title> Federal Bank Bot by the Chatty Botters </title>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.4.8/socket.io.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+	<style>
+	  * { margin: 0; padding: 0; box-sizing: border-box; }
+	  body { font: 13px Helvetica, Arial; }
+	  form { background: #000; padding: 3px; position: fixed; bottom: 0; width: 100%; }
+	  form input { border: 0; padding: 10px; width: 90%; margin-right: .5%; }
+	  form button { width: 9%; background: rgb(200, 0, 0); border: none; padding: 10px; }
+	  #messages { list-style-type: none; margin: 0; padding: 0; }
+	  #messages li { padding: 5px 10px; }
+	  #messages li:nth-child(odd) { background: #eee; }
+	</style>
+  </head>
+  <body>
+    <script type = "text/javascript">
+
+      $(document).ready(function() {
+          var socket = io.connect('http://localhost:3110/');
+          socket.on('connect', function() {
+              socket.send('User has connected!');
+          });
+      
+          socket.on('message', function(msg) {
+              $('#message-list').append('<li>'+msg+'</li>');
+              console.log('Received message');
+          });
+          $('#sendbutton').on('click', function() {
+              socket.send($('#myMessage').val());
+              $('#myMessage').val('');
+              //$('#message-list').val($('#myMessage').val());
+              //socket.send($('#myMessage').val());
+          });
+      });
+      
+    </script>
+
+    <ul id = "message-list"> </ul>
+
+    <form>
+      <input id="myMessage" autocomplete="off" /><button id = "sendbutton">Send</button>
+    </form>
+    
+  </body>
+  </html>
