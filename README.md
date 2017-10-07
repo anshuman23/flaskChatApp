@@ -1,5 +1,4 @@
-#How to use this
-(Looking at you, Chahal and Vidushi)
+# How to use this
 
 - Open index.html in your browser
 - Run ```python chatUI.py``` in a new terminal
